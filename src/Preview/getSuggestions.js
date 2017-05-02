@@ -13,8 +13,7 @@ const index = client.initIndex('docs');
  */
 const getSuggestions = (query) => {
     return index.search(query, {
-        hitsPerPage: 5,
-        tagFilters: [version``]
+        hitsPerPage: 5
     });
 }
 
