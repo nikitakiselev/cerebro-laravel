@@ -5,7 +5,6 @@ import KeyboardNav from './../KeyboardNav'
 import KeyboardNavItem from './../KeyboardNavItem'
 import getSuggestions from './getSuggestions'
 import styles from './styles.css'
-const renderHTML = require('react-render-html');
 
 class Preview extends Component {
     renderSuggestions(suggestions, searchFn) {
@@ -21,29 +20,12 @@ class Preview extends Component {
                     <ul className={styles.list}>
                         {
                             hits.map(hit => {
-                                let title = `<p>${hit._highlightResult.h1.value}</p>`;
-
-                                if (hit._highlightResult.h2) {
-                                    title += `<p>#${hit._highlightResult.h2.value}`;
-
-                                    if (hit._highlightResult.h3) {
-                                        title += ` > ${hit._highlightResult.h3.value}`;
-                                    }
-
-                                    if (hit._highlightResult.h4) {
-                                        title += ` > ${hit._highlightResult.h4.value}`;
-                                    }
-
-                                    title += '</p>';
-                                }
-
                                 return <KeyboardNavItem
                                     key={hit.objectID}
                                     tagName={'li'}
                                     onSelect={() => searchFn(hit.link)}
-                                >
-                                    {renderHTML(title)}
-                                </KeyboardNavItem>
+                                    hit={hit}
+                                />
                             })
                         }
                     </ul>

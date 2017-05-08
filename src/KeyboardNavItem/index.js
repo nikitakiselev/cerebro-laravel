@@ -22,8 +22,38 @@ const KeyboardNavItem = ({tagName, ...props}) => {
         tabIndex: 0,
     }
     const TagName = tagName || 'div'
+
+/*let title = `<p>${hit._highlightResult.h1.value}</p>`;
+
+                                if (hit._highlightResult.h2) {
+                                    title += `<p>#${hit._highlightResult.h2.value}`;
+
+                                    if (hit._highlightResult.h3) {
+                                        title += ` > ${hit._highlightResult.h3.value}`;
+                                    }
+
+                                    if (hit._highlightResult.h4) {
+                                        title += ` > ${hit._highlightResult.h4.value}`;
+                                    }
+
+                                    title += '</p>';
+                                }*/
+
+    let title = <h2>{props.hit.h1}</h2>
+    let subHeader = '';
+    if (props.hit.h2) {
+        subHeader = <p>
+            # {props.hit.h2}
+            {props.hit.h3 && <span> > {props.hit.h3}</span>}
+            {props.hit.h4 && <span> > {props.hit.h4}</span>}
+        </p>
+    }
+
     return (
-        <TagName {...props} {...itemProps} />
+        <TagName {...props} {...itemProps}>
+            {title}
+            {subHeader}
+        </TagName>
     )
 }
 
